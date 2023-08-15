@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react"
-
+import process from "process"
 interface Props {
     children: ReactNode
 }
@@ -41,6 +41,7 @@ export const ResultContextProvider = ({ children }: Props) => {
     const getResults = async (type: string) => {
         setIsloading(true)
 
+        console.log(process.env.REACT_APP_RAPID_API_KEY)
         const response = await fetch(`${baseUrl}${type}`, {
             method: 'GET',
             headers: {
@@ -48,7 +49,6 @@ export const ResultContextProvider = ({ children }: Props) => {
                 'X-RapidAPI-Host': `${process.env.REACT_APP_RAPID_HOST}`
             }
         })
-
         const data = await response.json()
         setResults(data)
         setIsloading(false)
