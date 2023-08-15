@@ -39,8 +39,6 @@ export const ResultContextProvider = ({ children }: Props) => {
 
     const getResults = async (type: string) => {
         setIsloading(true)
-
-        console.log(process.env.REACT_APP_RAPID_API_KEY)
         const response = await fetch(`${baseUrl}${type}`, {
             method: 'GET',
             headers: {
